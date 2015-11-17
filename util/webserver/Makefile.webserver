@@ -1,0 +1,1 @@
+APP_SOURCES += httpd.c fs.c miscfun.c webhnd.c webpost.c webvar.c 
