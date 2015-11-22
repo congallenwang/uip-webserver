@@ -187,7 +187,7 @@ httpd_appcall(void)
 		  /*
                 ** Find file/data to send
                 */
-                printf("hs->state == HTTP_END \r\n");
+                //printf("hs->state == HTTP_END \r\n");
                 if ((hs->http.uri_len == 0) || hs->http.error) {
                     build_status_code(BAD_REQUEST_400, hs);
                 }
@@ -215,15 +215,13 @@ httpd_appcall(void)
                     }
 
                     /*
-                    ** Handle actual method, GET or POST
-                    */
+           ** Handle actual method, GET or POST
+           */
                     switch (hs->http.method) {
                     case ISO_G:
- 
-
                         /* Check for a request for "/". */
                         if (hs->http.uri[0] == ISO_slash && hs->http.uri_len == 1) {
-                            web_select_page("index", hs);
+                           web_select_page("index", hs);                           
                         } else {
                             web_select_page((const char *) &hs->http.uri[1], hs);
                         } 
@@ -259,7 +257,7 @@ httpd_appcall(void)
         ** Check for any close events.
         */
         if (uip_closed() || uip_aborted() || uip_timedout()) {
-	     printf("\r\n http_process_init \r\n");
+	     //printf("\r\n http_process_init \r\n");
             web_send_complete(hs);
             http_process_init();
         }
@@ -269,7 +267,7 @@ httpd_appcall(void)
                    we've previously sent. If so, we move the file pointer further
                    into the file and send back more data. If we are out of data to
                    send, we close the connection. */
-		printf("hs->state == HTTP_END 1 \r\n");
+		//printf("hs->state == HTTP_END 1 \r\n");
 		if(uip_acked()) {
                     if(hs->count >= uip_conn->len) {
                         hs->count -= uip_conn->len;
@@ -339,6 +337,8 @@ uchar http_search_body (const char *name_ptr, char *value_ptr, uchar bufsiz)
     name_len = strlen(name_ptr);
     body_ptr = body_buf;
     remainder = hs->http.body_len;
+
+    //printf("%s\n",body_ptr);
 
     while (remainder != 0) {
         if (*body_ptr == *name_ptr) {
@@ -481,6 +481,7 @@ static void http_process (void)
     dat = uip_appdata;
     remainder = uip_len;
 
+    //printf("%s\n",dat);
 #if 0
 //if(hs->state == HTTP_MULTI_HEADER)
 {

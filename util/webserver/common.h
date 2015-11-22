@@ -18,7 +18,8 @@ typedef unsigned long ulong  ;
 typedef unsigned short ushort ; 
 
 
-#define TRANSIT_WEB_TIMEOUT  1
+//#define TRANSIT_WEB_TIMEOUT  1
+#define TRANSIT_WEB_TIMEOUT  0
 #define FILE_UPDOWN_LOAD     1
 
 /* 

@@ -319,7 +319,9 @@ void web_select_func (struct httpd_state  *hs)
 	if ( !password_entered(hs) ) {
         return;
     }
-		
+
+   //printf("formvar:%s\n",form_var);
+        
 		if (find_form_var("led"))  {
 				str_conv_to_upper_case(form_var);
 				if(strcmp(form_var, "ON") == 0){
@@ -328,6 +330,11 @@ void web_select_func (struct httpd_state  *hs)
 						//LED_Green_OFF();
 				}
 		}
+
+             if(find_form_var("dslmode"))
+             {
+                    printf("dslmode:%d\n",atoi(form_var));
+             }
 
 	web_select_page("postdemo", hs);
 }
@@ -381,6 +388,82 @@ void web_radio_func (struct httpd_state  *hs)
 		}
 		
 		web_select_page("postdemo", hs);
+}
+
+
+uint g_maxrate=88;
+
+void web_dslconfig_func(struct httpd_state *hs)
+{
+    //dslService=1&caplist_co=0&caplist_rt=0&dslWires=3&dslStandard=7&lineprobe=1&extend=0&extend_rate_fix_value=0&minrate=3&maxrate=89&dslmode=13&SUBMIT=Apply
+    int dslService;
+    int caplist_co;
+    int caplist_rt;
+    int dslWires;
+    int dslStandard;
+    int lineprobe;
+    int extend;
+    int extend_rate_fix_value;
+    int minrate;
+    int maxrate;
+    int dslmode;
+
+    
+    if ( !password_entered(hs) ) 
+    {
+        return;
+    }
+
+    if(find_form_var("dslService"))
+    {
+        dslService = atoi(form_var);
+        printf("dslmode:%d\n",dslService);
+    }
+
+    if(find_form_var("caplist_co"))
+    {
+        caplist_co = atoi(form_var);
+        printf("caplist_co:%d\n",caplist_co);
+    }
+
+    if(find_form_var("caplist_rt"))
+    {
+        caplist_rt = atoi(form_var);
+        printf("caplist_rt:%d\n",caplist_rt);
+    }
+
+    if(find_form_var("dslWires"))
+    {
+        dslWires = atoi(form_var);
+        printf("dslWires:%d\n",dslWires);
+    }
+
+    if(find_form_var("dslStandard"))
+    {
+        dslStandard = atoi(form_var);
+        printf("dslStandard:%d\n",dslStandard);
+    }
+
+    if(find_form_var("lineprobe"))
+    {
+        lineprobe = atoi(form_var);
+        printf("lineprobe:%d\n",lineprobe);
+    }
+    
+    if(find_form_var("extend_rate_fix_value"))
+    {
+        extend_rate_fix_value = atoi(form_var);
+        printf("dslmode:%d\n",extend_rate_fix_value);
+    }
+
+    if(find_form_var("maxrate"))
+    {
+        g_maxrate=maxrate = atoi(form_var);
+        printf(" maxrate:%d\n",maxrate);
+    }
+   
+
+    web_select_page("config", hs);
 }
  
  

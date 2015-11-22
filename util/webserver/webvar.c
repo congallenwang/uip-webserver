@@ -154,6 +154,7 @@ static ushort type_a_functions(uchar  *escape, char  *dst_ptr)
     return strlen(dst_ptr);
 }
  
+extern uint g_maxrate;
 
 static ushort type_b_functions(uchar  *escape, char  *dst_ptr)
 {
@@ -165,26 +166,40 @@ static ushort type_b_functions(uchar  *escape, char  *dst_ptr)
     p1 = (escape[0] - '0') * 10 + (escape[1] - '0');
  
     switch (p1) {
-			//MAC Address
-			case 0:
-				sprintf(dst_ptr,"%02X-%02X-%02X-%02X-%02X-%02X", uip_ethaddr.addr[0], uip_ethaddr.addr[1], uip_ethaddr.addr[2], uip_ethaddr.addr[3], uip_ethaddr.addr[4], uip_ethaddr.addr[5] );
-				break;
-			//SW version
-			case 1:
-        strcpy(dst_ptr, Vxy);
-        break;
-			//IP Address
-			case 2:
-        print_ip_str(dst_ptr, uip_hostaddr);
-        break;
-			//Subnet Mask
-			case 3:
-        print_ip_str(dst_ptr, uip_netmask);
-        break;
-			//Gateway
- 			case 4:
-        print_ip_str(dst_ptr, uip_draddr);
-        break;
+	//MAC Address
+	case 0:
+	    sprintf(dst_ptr,"%02X-%02X-%02X-%02X-%02X-%02X", uip_ethaddr.addr[0], uip_ethaddr.addr[1], uip_ethaddr.addr[2], uip_ethaddr.addr[3], uip_ethaddr.addr[4], uip_ethaddr.addr[5] );
+	    break;
+
+        //SW version
+	 case 1:
+            strcpy(dst_ptr, Vxy);
+            break;
+
+        //IP Address
+	case 2:
+            print_ip_str(dst_ptr, uip_hostaddr);
+            break;
+
+        //Subnet Mask
+	case 3:
+            print_ip_str(dst_ptr, uip_netmask);
+            break;
+
+        //Gateway
+        case 4:
+            print_ip_str(dst_ptr, uip_draddr);
+            break;
+
+        //test
+        case 5:            
+            sprintf(dst_ptr,"%d",g_maxrate);
+            break;
+
+       //image date/time
+       case 6:
+            sprintf(dst_ptr,"%s(%s)",__DATE__,__TIME__);
+            break;
  
     default :
         break;

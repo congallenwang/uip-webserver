@@ -78,7 +78,10 @@ static struct httpd_state *reboot_hs = 0; // pnc PTR_NULL;
  *
  *
  * ************************************************************************ */
-uchar  web_logged_in = 0;
+//allen: no log in
+//uchar  web_logged_in = 0;
+uchar  web_logged_in = 1;
+
 #if TRANSIT_WEB_TIMEOUT
 ushort	adminIp[2];   /** The IP address of the currently connected remote host. **/
 uchar	web_failed_login = 0;
@@ -180,7 +183,8 @@ void web_select_page (const char *name, struct httpd_state  *hs)
 	}
 	
 	// wux Handle login session
-    if ( web_logged_in  ) web_login_to = LOGIN_TIMEOUT;  
+    if ( web_logged_in  ) 
+        web_login_to = LOGIN_TIMEOUT;  
 #endif /* TRANSIT_WEB_TIMEOUT */
     if (!fs_open(name, &hs->file)) {
         fs_open("404", &hs->file);

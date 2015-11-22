@@ -1,1 +1,1 @@
-APP_SOURCES += index.c bg.c duplicate.c get.c httpstat.c left.c password.c passwordConfirmation.c postdemo.c sys.c top.c upload.c uploaddone.c
+APP_SOURCES += index.c bg.c duplicate.c get.c httpstat.c left.c password.c passwordConfirmation.c postdemo.c sys.c top.c upload.c uploaddone.c config.c default.c manage.c status.c
