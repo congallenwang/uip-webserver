@@ -88,15 +88,15 @@ function dslinit() {
 		document.getElementById("caplist_rt").value = 0;
 	}
 	
-	document.getElementById("dslWires").value = 3;
-	document.getElementById("dslStandard").value = 7;
-	document.getElementById("lineprobe").value = 1;
-	document.getElementById("extend").value = 0;
-	document.getElementById("extend_rate_fix_value").value = 0;
+	document.getElementById("dslWires").value = @D01;//3;
+	document.getElementById("dslStandard").value = @D02;//7;
+	document.getElementById("lineprobe").value = @D03;//1;
+	document.getElementById("extend").value = @D04;//0;
+	document.getElementById("extend_rate_fix_value").value = @D05;//0;
 	/*document.getElementById("extend_rate_auto").value = 0;*/
-	document.getElementById("minrate").value = 3;
-	document.getElementById("maxrate").value = @B05;
-	document.getElementById("dslmode").value = 13;
+	document.getElementById("minrate").value = @D06;//3;
+	document.getElementById("maxrate").value = @D07;
+	document.getElementById("dslmode").value = @D08;//13;
 	
   servicemode();
 }

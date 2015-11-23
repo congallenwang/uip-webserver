@@ -12,7 +12,9 @@
  
 #include "uip.h"
 #include <string.h> 
+#include "configmanage.h"
 
+extern CONFIG_PARAM g_config;
 extern char Vxy[];
 extern uip_ipaddr_t uip_hostaddr, uip_netmask, uip_draddr;
 extern struct uip_eth_addr uip_ethaddr;
@@ -54,6 +56,7 @@ extern struct uip_eth_addr uip_ethaddr;
  
 static ushort type_a_functions (uchar  *escape, char  *dst_ptr);
 static ushort type_b_functions (uchar  *escape, char  *dst_ptr);
+static ushort type_d_functions(uchar  *escape, char  *dst_ptr);
 
 static void format_js_array_element (uchar index, char  *src_ptr, char  *dst_ptr);
 static void print_ip_str(char  *dst_ptr, uip_ipaddr_t addr);
@@ -129,14 +132,19 @@ uchar web_get_var (var_buf_t  *var_buf,  uchar  *src)
         var_buf->len =  type_b_functions(src, var_buf->dat);
         return 4; 
 #ifdef FILE_UPDOWN_LOAD
-		case 'C' :
+    case 'C' :
         // Copy data string over the @C in the HTTP buffer
         //
         var_buf->len = sprintf(var_buf->dat, "%ld", upload_file_length);
         return 2; 
 #endif
+    case 'D' :
+        // Copy data string over the @Dxx in the HTTP buffer
+        //
+        var_buf->len =  type_d_functions(src, var_buf->dat);
+        return 4;
 		
-		default:
+    default:
         return 2;
         break;
 	} 
@@ -154,7 +162,6 @@ static ushort type_a_functions(uchar  *escape, char  *dst_ptr)
     return strlen(dst_ptr);
 }
  
-extern uint g_maxrate;
 
 static ushort type_b_functions(uchar  *escape, char  *dst_ptr)
 {
@@ -193,7 +200,7 @@ static ushort type_b_functions(uchar  *escape, char  *dst_ptr)
 
         //test
         case 5:            
-            sprintf(dst_ptr,"%d",g_maxrate);
+            sprintf(dst_ptr,"%d",g_config.maxrate);
             break;
 
        //image date/time
@@ -208,6 +215,65 @@ static ushort type_b_functions(uchar  *escape, char  *dst_ptr)
  
     return strlen(dst_ptr);
 }
+
+
+static ushort type_d_functions(uchar  *escape, char  *dst_ptr)
+{
+    uchar p1;
+ 
+
+    // Switch on the Function Number   
+    p1 = (escape[0] - '0') * 10 + (escape[1] - '0');
+ 
+    switch (p1) {
+        //dslWires
+        case 1:            
+            sprintf(dst_ptr,"%d",g_config.dslWires);
+            break;
+
+        //dslStandard
+        case 2:            
+            sprintf(dst_ptr,"%d",g_config.dslStandard);
+            break;
+
+        //lineprobe
+        case 3:            
+            sprintf(dst_ptr,"%d",g_config.lineprobe);
+            break;
+
+        //extend
+        case 4:            
+            sprintf(dst_ptr,"%d",g_config.extend);
+            break;
+
+        //extend_rate_fix_value
+        case 5:            
+            sprintf(dst_ptr,"%d",g_config.extend_rate_fix_value);
+            break;
+            
+        //minrate
+        case 6:            
+            sprintf(dst_ptr,"%d",g_config.minrate);
+            break;
+
+        //maxrate
+        case 7:            
+            sprintf(dst_ptr,"%d",g_config.maxrate);
+            break; 
+
+        //dslmode
+        case 8:            
+            sprintf(dst_ptr,"%d",g_config.dslmode);
+            break;         
+ 
+        default :
+            break;
+ 
+    }
+ 
+    return strlen(dst_ptr);
+}
+
 
 static void print_ip_str(char  *dst_ptr, uip_ipaddr_t addr)
 {

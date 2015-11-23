@@ -38,7 +38,7 @@ APPS   = webserver webpages
 CFLAGS = -Wall -g -Dlinux -I../uip -I. -fpack-struct -Os
 -include ../uip/Makefile.include
 
-uip: $(addprefix $(OBJECTDIR)/, main.o tapdev.o clock-arch.o) apps.a uip.a
+uip: $(addprefix $(OBJECTDIR)/, main.o tapdev.o clock-arch.o configmanage.o) apps.a uip.a
 
 clean:
 	rm -fr *.o *~ *core uip $(OBJECTDIR) *.a

@@ -4,7 +4,7 @@
 #ifndef CONFIG_H_INC
 #define CONFIG_H_INC
 
-#define CONFIG_SIZE 13628
+#define CONFIG_SIZE 13677
 
 extern const uchar  config_htm[CONFIG_SIZE];
 

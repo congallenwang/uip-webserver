@@ -49,6 +49,8 @@
 #define NULL (void *)0
 #endif /* NULL */
 
+void initconfig();
+
 /*---------------------------------------------------------------------------*/
 int
 main(void)
@@ -59,6 +61,10 @@ main(void)
 
   timer_set(&periodic_timer, CLOCK_SECOND / 2);
   timer_set(&arp_timer, CLOCK_SECOND * 10);
+
+
+  //init config
+  initconfig();
   
   tapdev_init();
   uip_init();

@@ -391,7 +391,8 @@ void web_radio_func (struct httpd_state  *hs)
 }
 
 
-uint g_maxrate=88;
+#include "configmanage.h"
+extern CONFIG_PARAM g_config;
 
 void web_dslconfig_func(struct httpd_state *hs)
 {
@@ -416,49 +417,49 @@ void web_dslconfig_func(struct httpd_state *hs)
 
     if(find_form_var("dslService"))
     {
-        dslService = atoi(form_var);
-        printf("dslmode:%d\n",dslService);
+        g_config.dslService = atoi(form_var);
+        printf("dslmode:%d\n",g_config.dslService);
     }
 
     if(find_form_var("caplist_co"))
     {
-        caplist_co = atoi(form_var);
-        printf("caplist_co:%d\n",caplist_co);
+        g_config.caplist_co = atoi(form_var);
+        printf("caplist_co:%d\n",g_config.caplist_co);
     }
 
     if(find_form_var("caplist_rt"))
     {
-        caplist_rt = atoi(form_var);
-        printf("caplist_rt:%d\n",caplist_rt);
+        g_config.caplist_rt = atoi(form_var);
+        printf("caplist_rt:%d\n",g_config.caplist_rt);
     }
 
     if(find_form_var("dslWires"))
     {
-        dslWires = atoi(form_var);
-        printf("dslWires:%d\n",dslWires);
+        g_config.dslWires = atoi(form_var);
+        printf("dslWires:%d\n",g_config.dslWires);
     }
 
     if(find_form_var("dslStandard"))
     {
-        dslStandard = atoi(form_var);
-        printf("dslStandard:%d\n",dslStandard);
+        g_config.dslStandard = atoi(form_var);
+        printf("dslStandard:%d\n",g_config.dslStandard);
     }
 
     if(find_form_var("lineprobe"))
     {
-        lineprobe = atoi(form_var);
-        printf("lineprobe:%d\n",lineprobe);
+        g_config.lineprobe = atoi(form_var);
+        printf("lineprobe:%d\n",g_config.lineprobe);
     }
     
     if(find_form_var("extend_rate_fix_value"))
     {
-        extend_rate_fix_value = atoi(form_var);
-        printf("dslmode:%d\n",extend_rate_fix_value);
+        g_config.extend_rate_fix_value = atoi(form_var);
+        printf("dslmode:%d\n",g_config.extend_rate_fix_value);
     }
 
     if(find_form_var("maxrate"))
     {
-        g_maxrate=maxrate = atoi(form_var);
+        g_config.maxrate=maxrate = atoi(form_var);
         printf(" maxrate:%d\n",maxrate);
     }
    
