@@ -265,6 +265,24 @@ static ushort type_d_functions(uchar  *escape, char  *dst_ptr)
         case 8:            
             sprintf(dst_ptr,"%d",g_config.dslmode);
             break;         
+
+        //dslService
+        case 9:            
+            sprintf(dst_ptr,"%d",g_config.dslService);
+            break;         
+
+//////////////////below are status reading//////////////////////////////
+
+        //dsl link rate
+        case 98:            
+            sprintf(dst_ptr,"%s","N/A");
+            break;             
+
+
+        //dsl status
+        case 99:            
+            sprintf(dst_ptr,"%s","Idle mode");
+            break;             
  
         default :
             break;

@@ -418,7 +418,7 @@ void web_dslconfig_func(struct httpd_state *hs)
     if(find_form_var("dslService"))
     {
         g_config.dslService = atoi(form_var);
-        printf("dslmode:%d\n",g_config.dslService);
+        printf("dslService:%d\n",g_config.dslService);
     }
 
     if(find_form_var("caplist_co"))
@@ -460,8 +460,21 @@ void web_dslconfig_func(struct httpd_state *hs)
     if(find_form_var("maxrate"))
     {
         g_config.maxrate=maxrate = atoi(form_var);
-        printf(" maxrate:%d\n",maxrate);
+        printf("maxrate:%d\n",maxrate);
     }
+
+     if(find_form_var("minrate"))
+    {
+        g_config.minrate= atoi(form_var);
+        printf("minrate:%d\n",g_config.minrate);
+     }
+
+    if(find_form_var("dslmode"))
+    {
+        g_config.dslmode = atoi(form_var);
+        printf("dslmode:%d\n",g_config.dslmode);
+    }
+
    
 
     web_select_page("config", hs);
